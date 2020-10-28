@@ -17,7 +17,13 @@ import model.AccountPayable;
 public class AccountPayableController {
     
     public void save(String provider, String docNumber, String type, String expirationDate, float value, String status){
-        AccountPayable ap = new AccountPayable(provider, docNumber, type, expirationDate, value, status);
+        AccountPayable ap = new AccountPayable();
+        ap.setProvider(provider);
+        ap.setDocNumber(docNumber);
+        ap.setType(type);
+        ap.setExpirationDate(expirationDate);
+        ap.setValue(value);
+        ap.setStatus(status);
         AccountPayableDAO apDao = new AccountPayableDAO();
         try {
             apDao.create(ap);
@@ -25,5 +31,5 @@ public class AccountPayableController {
             JOptionPane.showMessageDialog(null, "Erro no Controller: " + ex);
         }
     }
-    
+
 }

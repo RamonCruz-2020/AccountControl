@@ -8,8 +8,13 @@ package dao;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.AccountPayable;
 
@@ -41,5 +46,31 @@ public class AccountPayableDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+        
+    public List<AccountPayable> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet ra = null;
+        List<AccountPayable> aps = new ArrayList<AccountPayable>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM accountpayable;");
+            ra = stmt.executeQuery();
+            while(ra.next()){
+               AccountPayable ap = new AccountPayable();
+               ap.setId(ra.getInt("id"));
+               ap.setProvider(ra.getString("provider"));
+               ap.setDocNumber(ra.getString("docnumber"));
+               ap.setType(ra.getString("type_"));
+               ap.setDate(ra.getDate("expirationdate"));
+               ap.setValue(ra.getFloat("value_"));
+               ap.setStatus(ra.getString("status_"));
+               aps.add(ap);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountPayableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, ra);
+        }
+        return aps;
+    }
 }

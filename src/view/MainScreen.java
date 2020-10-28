@@ -7,10 +7,8 @@ package view;
 
 import controller.AccountPayableController;
 import dao.AccountPayableDAO;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.AccountPayable;
 
 /**
@@ -25,6 +23,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        readTable();
     }
 
     /**
@@ -53,6 +52,7 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jTextFieldProvider = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -73,11 +73,11 @@ public class MainScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fornecedor", "Doc nº", "Tipo", "Data de Vencimento", "Valor", "Status"
+                "ID", "Fornecedor", "Doc nº", "Tipo", "Data de Vencimento", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -133,6 +133,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-icon.png"))); // NOI18N
+        jButton2.setPreferredSize(new java.awt.Dimension(36, 36));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,7 +149,6 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -165,8 +172,13 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(143, Short.MAX_VALUE))
+                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 133, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +198,9 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -201,7 +215,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Contas a Receber", jPanel2);
@@ -237,14 +251,26 @@ public class MainScreen extends javax.swing.JFrame {
 
         if(jTextFieldProvider.getText().isEmpty() == false && jTextFieldDocNumber.getText().isEmpty() == false && jComboBoxType.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDate.getText().isEmpty() == false && jFormattedTextFieldValue.getText().isEmpty() == false && jComboBoxStatus.getSelectedItem().toString().isEmpty() == false){
             apc.save(jTextFieldProvider.getText(), jTextFieldDocNumber.getText(), jComboBoxType.getSelectedItem().toString(), jFormattedTextFieldExpirationDate.getText(),Float.parseFloat(jFormattedTextFieldValue.getText()), jComboBoxStatus.getSelectedItem().toString());
+            jTextFieldProvider.setText("");
+            jTextFieldDocNumber.setText("");
+            jFormattedTextFieldExpirationDate.setText("");
+            jFormattedTextFieldValue.setText("");
+            
         }else{
             JOptionPane.showMessageDialog(null, "Campo vazio!");
         }
+        readTable();
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProviderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldProviderActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        readTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,9 +306,27 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
     }
+    
+    public final void readTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setNumRows(0);
+        AccountPayableDAO apDao = new AccountPayableDAO();
+        for(AccountPayable ap: apDao.read()){
+            model.addRow(new Object[]{
+                ap.getId(),
+                ap.getProvider(),
+                ap.getDocNumber(),
+                ap.getType(),
+                ap.getExpirationDate(),
+                ap.getValue(),
+                ap.getStatus()
+            });
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JFormattedTextField jFormattedTextFieldExpirationDate;

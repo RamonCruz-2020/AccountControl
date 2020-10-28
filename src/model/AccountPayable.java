@@ -23,13 +23,8 @@ public class AccountPayable {
     private float value;
     private String status;
 
-    public AccountPayable(String provider, String docNumber, String type, String expirationDate, float value, String status) {
-        this.provider = provider;
-        this.docNumber = docNumber;
-        this.type = type;
-        this.expirationDate = expirationDate;
-        this.value = value;
-        this.status = status;
+    public AccountPayable() {
+   
     }
 
     public int getId() {
@@ -94,4 +89,9 @@ public class AccountPayable {
         date = format.parse(this.expirationDate);
         return date;
     }
+    
+    public void setDate(Date expirationDate){
+        this.expirationDate = expirationDate.toString();
+    }
+    
 }
