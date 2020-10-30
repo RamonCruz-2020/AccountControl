@@ -73,4 +73,26 @@ public class AccountPayableDAO {
         }
         return aps;
     }
+    
+    public void update(AccountPayable ap) throws ParseException{
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        Object param = new java.sql.Timestamp(ap.getDate().getTime());
+        try {
+            stmt = con.prepareStatement("UPDATE accountpayable SET provider = ?, docnumber = ?, type_ = ?, expirationdate = ?, value_ = ?, status_ = ? WHERE id = ?;");
+            stmt.setString(1, ap.getProvider());
+            stmt.setString(2, ap.getDocNumber());
+            stmt.setString(3, ap.getType());
+            stmt.setObject(4, param);
+            stmt.setFloat(5, ap.getValue());
+            stmt.setString(6, ap.getStatus());
+            stmt.setInt(7, ap.getId());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
 }
