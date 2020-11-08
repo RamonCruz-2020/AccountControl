@@ -85,10 +85,8 @@ public class AccountPayable {
     }
     
     public Date getDate() throws ParseException{
-        Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        date = format.parse(this.expirationDate);
-        return date;
+        return format.parse(this.expirationDate);
     }
     
     public void setDate(Date expirationDate){
