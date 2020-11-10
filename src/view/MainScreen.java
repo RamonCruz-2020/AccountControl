@@ -6,11 +6,12 @@
 package view;
 
 import controller.AccountPayableController;
-import dao.AccountPayableDAO;
+import controller.AccountReceivableController;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.AccountPayable;
+import model.AccountReceivable;
 
 /**
  *
@@ -19,6 +20,7 @@ import model.AccountPayable;
 public class MainScreen extends javax.swing.JFrame {
 
     AccountPayableController apc = new AccountPayableController();
+    AccountReceivableController arc = new AccountReceivableController();
     /**
      * Creates new form MainScreen
      */
@@ -39,24 +41,42 @@ public class MainScreen extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAP = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldDocNumber = new javax.swing.JTextField();
+        jTextFieldDocNumberAP = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxType = new javax.swing.JComboBox<>();
+        jComboBoxTypeAP = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextFieldExpirationDate = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldExpirationDateAP = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextFieldValue = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldValueAP = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBoxStatus = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jTextFieldProvider = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jComboBoxStatusAP = new javax.swing.JComboBox<>();
+        jButtonSaveAP = new javax.swing.JButton();
+        jTextFieldProviderAP = new javax.swing.JTextField();
+        jButtonRefreshAP = new javax.swing.JButton();
+        jButtonUpdateAP = new javax.swing.JButton();
+        jButtonDeleteAP = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableAR = new javax.swing.JTable();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jTextFieldDocNumberAR = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jComboBoxTypeAR = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        jFormattedTextFieldExpirationDateAR = new javax.swing.JFormattedTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jFormattedTextFieldValueAR = new javax.swing.JFormattedTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jComboBoxStatusAR = new javax.swing.JComboBox<>();
+        jButtonSaveAR = new javax.swing.JButton();
+        jTextFieldClientAR = new javax.swing.JTextField();
+        jButtonRefreshAR = new javax.swing.JButton();
+        jButtonUpdateAR = new javax.swing.JButton();
+        jButtonDeleteAR = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -70,8 +90,8 @@ public class MainScreen extends javax.swing.JFrame {
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTableAP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -87,81 +107,81 @@ public class MainScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableAP.setToolTipText("");
+        jTableAP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTableAPMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableAP);
 
         jLabel1.setText("Fornecedor");
 
         jLabel2.setText("Doc nº");
 
-        jTextFieldDocNumber.setToolTipText("");
-        jTextFieldDocNumber.setName(""); // NOI18N
+        jTextFieldDocNumberAP.setToolTipText("");
+        jTextFieldDocNumberAP.setName(""); // NOI18N
 
         jLabel3.setText("Tipo");
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boleto" }));
+        jComboBoxTypeAP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boleto" }));
 
         jLabel4.setText("Data de Vecimento");
 
         try {
-            jFormattedTextFieldExpirationDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldExpirationDateAP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldExpirationDate.setToolTipText("");
+        jFormattedTextFieldExpirationDateAP.setToolTipText("");
 
         jLabel5.setText("Valor");
 
-        jFormattedTextFieldValue.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldValueAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldValueActionPerformed(evt);
+                jFormattedTextFieldValueAPActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Status");
 
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "A pagar" }));
+        jComboBoxStatusAP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "A pagar" }));
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSaveAP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonSaveAP.setText("Salvar");
+        jButtonSaveAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSaveAPActionPerformed(evt);
             }
         });
 
-        jTextFieldProvider.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldProviderAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProviderActionPerformed(evt);
+                jTextFieldProviderAPActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-icon.png"))); // NOI18N
-        jButton2.setPreferredSize(new java.awt.Dimension(36, 36));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRefreshAP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-icon.png"))); // NOI18N
+        jButtonRefreshAP.setPreferredSize(new java.awt.Dimension(36, 36));
+        jButtonRefreshAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonRefreshAPActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton3.setText("Atualizar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUpdateAP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonUpdateAP.setText("Atualizar");
+        jButtonUpdateAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonUpdateAPActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setText("Excluir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDeleteAP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonDeleteAP.setText("Excluir");
+        jButtonDeleteAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonDeleteAPActionPerformed(evt);
             }
         });
 
@@ -176,39 +196,39 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldProvider, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldProviderAP, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonSaveAP, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jButtonUpdateAP)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonDeleteAP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDocNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDocNumberAP, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxTypeAP, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextFieldExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldExpirationDateAP, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldValueAP, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxStatusAP, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(954, 954, 954)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonRefreshAP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -218,41 +238,204 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldDocNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDocNumberAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTypeAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldExpirationDateAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jFormattedTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldValueAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxStatusAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldProviderAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRefreshAP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)))
+                        .addComponent(jButtonSaveAP)
+                        .addComponent(jButtonUpdateAP)
+                        .addComponent(jButtonDeleteAP)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Contas a Pagar", jPanel1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1308, Short.MAX_VALUE)
+        jTableAR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTableAR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Cliente", "Doc nº", "Tipo", "Data de Vencimento", "Valor", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableAR.setToolTipText("");
+        jTableAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableARMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableAR);
+
+        jLabel13.setText("Cliente");
+
+        jLabel14.setText("Doc nº");
+
+        jTextFieldDocNumberAR.setToolTipText("");
+        jTextFieldDocNumberAR.setName(""); // NOI18N
+
+        jLabel15.setText("Tipo");
+
+        jComboBoxTypeAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boleto" }));
+
+        jLabel16.setText("Data de Vecimento");
+
+        try {
+            jFormattedTextFieldExpirationDateAR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldExpirationDateAR.setToolTipText("");
+
+        jLabel17.setText("Valor");
+
+        jFormattedTextFieldValueAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldValueARActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Status");
+
+        jComboBoxStatusAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "A pagar" }));
+        jComboBoxStatusAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusARActionPerformed(evt);
+            }
+        });
+
+        jButtonSaveAR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonSaveAR.setText("Salvar");
+        jButtonSaveAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveARActionPerformed(evt);
+            }
+        });
+
+        jTextFieldClientAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldClientARActionPerformed(evt);
+            }
+        });
+
+        jButtonRefreshAR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-icon.png"))); // NOI18N
+        jButtonRefreshAR.setPreferredSize(new java.awt.Dimension(36, 36));
+        jButtonRefreshAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshARActionPerformed(evt);
+            }
+        });
+
+        jButtonUpdateAR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonUpdateAR.setText("Atualizar");
+        jButtonUpdateAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateARActionPerformed(evt);
+            }
+        });
+
+        jButtonDeleteAR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButtonDeleteAR.setText("Excluir");
+        jButtonDeleteAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteARActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldClientAR, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonSaveAR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonUpdateAR)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDeleteAR, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldDocNumberAR, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxTypeAR, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedTextFieldExpirationDateAR, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedTextFieldValueAR, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxStatusAR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(954, 954, 954)
+                        .addComponent(jButtonRefreshAR, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jTextFieldDocNumberAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jComboBoxTypeAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(jFormattedTextFieldExpirationDateAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(jFormattedTextFieldValueAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(jComboBoxStatusAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldClientAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonRefreshAR, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonSaveAR)
+                        .addComponent(jButtonUpdateAR)
+                        .addComponent(jButtonDeleteAR)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("Contas a Receber", jPanel2);
+        jTabbedPane1.addTab("Contas a Receber", jPanel3);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -277,79 +460,153 @@ public class MainScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextFieldValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValueActionPerformed
+    private void jButtonDeleteAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteAPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldValueActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTableAP.getSelectedRow() != -1){
+            if(jTextFieldProviderAP.getText().isEmpty() == false && jTextFieldDocNumberAP.getText().isEmpty() == false && jComboBoxTypeAP.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDateAP.getText().isEmpty() == false && jFormattedTextFieldValueAP.getText().isEmpty() == false && jComboBoxStatusAP.getSelectedItem().toString().isEmpty() == false){
+                apc.delete((int)jTableAP.getValueAt(jTableAP.getSelectedRow(), 0), jTextFieldProviderAP.getText(), jTextFieldDocNumberAP.getText(), jComboBoxTypeAP.getSelectedItem().toString(), jFormattedTextFieldExpirationDateAP.getText(),Float.parseFloat(jFormattedTextFieldValueAP.getText()), jComboBoxStatusAP.getSelectedItem().toString());
+                jTextFieldProviderAP.setText("");
+                jTextFieldDocNumberAP.setText("");
+                jFormattedTextFieldExpirationDateAP.setText("");
+                jFormattedTextFieldValueAP.setText("");
 
-        if(jTextFieldProvider.getText().isEmpty() == false && jTextFieldDocNumber.getText().isEmpty() == false && jComboBoxType.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDate.getText().isEmpty() == false && jFormattedTextFieldValue.getText().isEmpty() == false && jComboBoxStatus.getSelectedItem().toString().isEmpty() == false){
-            apc.save(jTextFieldProvider.getText(), jTextFieldDocNumber.getText(), jComboBoxType.getSelectedItem().toString(), jFormattedTextFieldExpirationDate.getText(),Float.parseFloat(jFormattedTextFieldValue.getText()), jComboBoxStatus.getSelectedItem().toString());
-            jTextFieldProvider.setText("");
-            jTextFieldDocNumber.setText("");
-            jFormattedTextFieldExpirationDate.setText("");
-            jFormattedTextFieldValue.setText("");
-            
+            }else{
+                JOptionPane.showMessageDialog(null, "Campo vazio!");
+            }
+            readTable(apc);
+        }
+    }//GEN-LAST:event_jButtonDeleteAPActionPerformed
+
+    private void jButtonUpdateAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateAPActionPerformed
+        if(jTableAP.getSelectedRow() != -1){
+            if(jTextFieldProviderAP.getText().isEmpty() == false && jTextFieldDocNumberAP.getText().isEmpty() == false && jComboBoxTypeAP.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDateAP.getText().isEmpty() == false && jFormattedTextFieldValueAP.getText().isEmpty() == false && jComboBoxStatusAP.getSelectedItem().toString().isEmpty() == false){
+                apc.update((int)jTableAP.getValueAt(jTableAP.getSelectedRow(), 0), jTextFieldProviderAP.getText(), jTextFieldDocNumberAP.getText(), jComboBoxTypeAP.getSelectedItem().toString(), jFormattedTextFieldExpirationDateAP.getText(),Float.parseFloat(jFormattedTextFieldValueAP.getText()), jComboBoxStatusAP.getSelectedItem().toString());
+                jTextFieldProviderAP.setText("");
+                jTextFieldDocNumberAP.setText("");
+                jFormattedTextFieldExpirationDateAP.setText("");
+                jFormattedTextFieldValueAP.setText("");
+
+            }else{
+                JOptionPane.showMessageDialog(null, "Campo vazio!");
+            }
+            readTable(apc);
+        }
+    }//GEN-LAST:event_jButtonUpdateAPActionPerformed
+
+    private void jButtonRefreshAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshAPActionPerformed
+        readTable(apc);
+    }//GEN-LAST:event_jButtonRefreshAPActionPerformed
+
+    private void jTextFieldProviderAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProviderAPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldProviderAPActionPerformed
+
+    private void jButtonSaveAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveAPActionPerformed
+
+        if(jTextFieldProviderAP.getText().isEmpty() == false && jTextFieldDocNumberAP.getText().isEmpty() == false && jComboBoxTypeAP.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDateAP.getText().isEmpty() == false && jFormattedTextFieldValueAP.getText().isEmpty() == false && jComboBoxStatusAP.getSelectedItem().toString().isEmpty() == false){
+            apc.create(jTextFieldProviderAP.getText(), jTextFieldDocNumberAP.getText(), jComboBoxTypeAP.getSelectedItem().toString(), jFormattedTextFieldExpirationDateAP.getText(),Float.parseFloat(jFormattedTextFieldValueAP.getText()), jComboBoxStatusAP.getSelectedItem().toString());
+            jTextFieldProviderAP.setText("");
+            jTextFieldDocNumberAP.setText("");
+            jFormattedTextFieldExpirationDateAP.setText("");
+            jFormattedTextFieldValueAP.setText("");
+
         }else{
             JOptionPane.showMessageDialog(null, "Campo vazio!");
         }
-        readTable();
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        readTable(apc);
 
-    private void jTextFieldProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProviderActionPerformed
+    }//GEN-LAST:event_jButtonSaveAPActionPerformed
+
+    private void jFormattedTextFieldValueAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValueAPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldProviderActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldValueAPActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        readTable();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        if(jTable1.getSelectedRow() != -1){
-            jTextFieldProvider.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-            jTextFieldDocNumber.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-            jComboBoxType.setSelectedItem(selectIten(jComboBoxType, jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()));
-            jFormattedTextFieldExpirationDate.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-            jFormattedTextFieldValue.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
-            jComboBoxStatus.setSelectedItem(selectIten(jComboBoxStatus, jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString()));
+    private void jTableAPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAPMouseClicked
+        if(jTableAP.getSelectedRow() != -1){
+            jTextFieldProviderAP.setText(jTableAP.getValueAt(jTableAP.getSelectedRow(), 1).toString());
+            jTextFieldDocNumberAP.setText(jTableAP.getValueAt(jTableAP.getSelectedRow(), 2).toString());
+            jComboBoxTypeAP.setSelectedItem(selectIten(jComboBoxTypeAP, jTableAP.getValueAt(jTableAP.getSelectedRow(), 3).toString()));
+            jFormattedTextFieldExpirationDateAP.setText(jTableAP.getValueAt(jTableAP.getSelectedRow(), 4).toString());
+            jFormattedTextFieldValueAP.setText(jTableAP.getValueAt(jTableAP.getSelectedRow(), 5).toString());
+            jComboBoxStatusAP.setSelectedItem(selectIten(jComboBoxStatusAP, jTableAP.getValueAt(jTableAP.getSelectedRow(), 6).toString()));
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_jTableAPMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(jTable1.getSelectedRow() != -1){
-            if(jTextFieldProvider.getText().isEmpty() == false && jTextFieldDocNumber.getText().isEmpty() == false && jComboBoxType.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDate.getText().isEmpty() == false && jFormattedTextFieldValue.getText().isEmpty() == false && jComboBoxStatus.getSelectedItem().toString().isEmpty() == false){
-            apc.update((int)jTable1.getValueAt(jTable1.getSelectedRow(), 0), jTextFieldProvider.getText(), jTextFieldDocNumber.getText(), jComboBoxType.getSelectedItem().toString(), jFormattedTextFieldExpirationDate.getText(),Float.parseFloat(jFormattedTextFieldValue.getText()), jComboBoxStatus.getSelectedItem().toString());
-            jTextFieldProvider.setText("");
-            jTextFieldDocNumber.setText("");
-            jFormattedTextFieldExpirationDate.setText("");
-            jFormattedTextFieldValue.setText("");
-            
+    private void jTableARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableARMouseClicked
+        if(jTableAR.getSelectedRow() != -1){
+            jTextFieldClientAR.setText(jTableAR.getValueAt(jTableAR.getSelectedRow(), 1).toString());
+            jTextFieldDocNumberAR.setText(jTableAR.getValueAt(jTableAR.getSelectedRow(), 2).toString());
+            jComboBoxTypeAR.setSelectedItem(selectIten(jComboBoxTypeAR, jTableAR.getValueAt(jTableAR.getSelectedRow(), 3).toString()));
+            jFormattedTextFieldExpirationDateAR.setText(jTableAR.getValueAt(jTableAR.getSelectedRow(), 4).toString());
+            jFormattedTextFieldValueAR.setText(jTableAR.getValueAt(jTableAR.getSelectedRow(), 5).toString());
+            jComboBoxStatusAR.setSelectedItem(selectIten(jComboBoxStatusAR, jTableAR.getValueAt(jTableAR.getSelectedRow(), 6).toString()));
+        }
+    }//GEN-LAST:event_jTableARMouseClicked
+
+    private void jFormattedTextFieldValueARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValueARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldValueARActionPerformed
+
+    private void jButtonSaveARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveARActionPerformed
+        if(jTextFieldClientAR.getText().isEmpty() == false && jTextFieldDocNumberAR.getText().isEmpty() == false && jComboBoxTypeAR.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDateAR.getText().isEmpty() == false && jFormattedTextFieldValueAR.getText().isEmpty() == false && jComboBoxStatusAR.getSelectedItem().toString().isEmpty() == false){
+            arc.create(jTextFieldClientAR.getText(), jTextFieldDocNumberAR.getText(), jComboBoxTypeAR.getSelectedItem().toString(), jFormattedTextFieldExpirationDateAR.getText(),Float.parseFloat(jFormattedTextFieldValueAR.getText()), jComboBoxStatusAR.getSelectedItem().toString());
+            jTextFieldClientAR.setText("");
+            jTextFieldDocNumberAR.setText("");
+            jFormattedTextFieldExpirationDateAR.setText("");
+            jFormattedTextFieldValueAR.setText("");
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Campo vazio!");
+        }
+        readTable(arc);
+    }//GEN-LAST:event_jButtonSaveARActionPerformed
+
+    private void jTextFieldClientARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClientARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldClientARActionPerformed
+
+    private void jButtonRefreshARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshARActionPerformed
+
+        readTable(arc);
+        
+    }//GEN-LAST:event_jButtonRefreshARActionPerformed
+
+    private void jButtonUpdateARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateARActionPerformed
+        if(jTableAR.getSelectedRow() != -1){
+            if(jTextFieldClientAR.getText().isEmpty() == false && jTextFieldDocNumberAR.getText().isEmpty() == false && jComboBoxTypeAR.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDateAR.getText().isEmpty() == false && jFormattedTextFieldValueAR.getText().isEmpty() == false && jComboBoxStatusAR.getSelectedItem().toString().isEmpty() == false){
+                arc.update((int)jTableAR.getValueAt(jTableAR.getSelectedRow(), 0), jTextFieldClientAR.getText(), jTextFieldDocNumberAR.getText(), jComboBoxTypeAR.getSelectedItem().toString(), jFormattedTextFieldExpirationDateAR.getText(),Float.parseFloat(jFormattedTextFieldValueAR.getText()), jComboBoxStatusAR.getSelectedItem().toString());
+                jTextFieldClientAR.setText("");
+                jTextFieldDocNumberAR.setText("");
+                jFormattedTextFieldExpirationDateAR.setText("");
+                jFormattedTextFieldValueAR.setText("");
+
             }else{
                 JOptionPane.showMessageDialog(null, "Campo vazio!");
             }
-        readTable();
+            readTable(arc);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonUpdateARActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-        if(jTable1.getSelectedRow() != -1){
-            if(jTextFieldProvider.getText().isEmpty() == false && jTextFieldDocNumber.getText().isEmpty() == false && jComboBoxType.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDate.getText().isEmpty() == false && jFormattedTextFieldValue.getText().isEmpty() == false && jComboBoxStatus.getSelectedItem().toString().isEmpty() == false){
-            apc.delete((int)jTable1.getValueAt(jTable1.getSelectedRow(), 0), jTextFieldProvider.getText(), jTextFieldDocNumber.getText(), jComboBoxType.getSelectedItem().toString(), jFormattedTextFieldExpirationDate.getText(),Float.parseFloat(jFormattedTextFieldValue.getText()), jComboBoxStatus.getSelectedItem().toString());
-            jTextFieldProvider.setText("");
-            jTextFieldDocNumber.setText("");
-            jFormattedTextFieldExpirationDate.setText("");
-            jFormattedTextFieldValue.setText("");
-            
+    private void jButtonDeleteARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteARActionPerformed
+        if(jTableAR.getSelectedRow() != -1){
+            if(jTextFieldClientAR.getText().isEmpty() == false && jTextFieldDocNumberAR.getText().isEmpty() == false && jComboBoxTypeAR.getSelectedItem().toString().isEmpty() == false && jFormattedTextFieldExpirationDateAR.getText().isEmpty() == false && jFormattedTextFieldValueAR.getText().isEmpty() == false && jComboBoxStatusAR.getSelectedItem().toString().isEmpty() == false){
+                arc.delete((int)jTableAR.getValueAt(jTableAR.getSelectedRow(), 0), jTextFieldClientAR.getText(), jTextFieldDocNumberAR.getText(), jComboBoxTypeAR.getSelectedItem().toString(), jFormattedTextFieldExpirationDateAR.getText(),Float.parseFloat(jFormattedTextFieldValueAR.getText()), jComboBoxStatusAR.getSelectedItem().toString());
+                jTextFieldClientAR.setText("");
+                jTextFieldDocNumberAR.setText("");
+                jFormattedTextFieldExpirationDateAR.setText("");
+                jFormattedTextFieldValueAR.setText("");
+
             }else{
                 JOptionPane.showMessageDialog(null, "Campo vazio!");
             }
-        readTable();
+            readTable(arc);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonDeleteARActionPerformed
+
+    private void jComboBoxStatusARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxStatusARActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,11 +641,10 @@ public class MainScreen extends javax.swing.JFrame {
         });
     }
     
-    public final void readTable(){
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    public final void readTable(AccountPayableController apc){
+        DefaultTableModel model = (DefaultTableModel) jTableAP.getModel();
         model.setNumRows(0);
-        AccountPayableDAO apDao = new AccountPayableDAO();
-        for(AccountPayable ap: apDao.read()){
+        for(AccountPayable ap: apc.read()){
             model.addRow(new Object[]{
                 ap.getId(),
                 ap.getProvider(),
@@ -397,6 +653,21 @@ public class MainScreen extends javax.swing.JFrame {
                 ap.getExpirationDate(),
                 ap.getValue(),
                 ap.getStatus()
+            });
+        }
+    }
+    public final void readTable(AccountReceivableController arc){
+        DefaultTableModel model = (DefaultTableModel) jTableAR.getModel();
+        model.setNumRows(0);
+        for(AccountReceivable ar: arc.read()){
+            model.addRow(new Object[]{
+                ar.getId(),
+                ar.getClient(),
+                ar.getDocNumber(),
+                ar.getType(),
+                ar.getExpirationDate(),
+                ar.getValue(),
+                ar.getStatus()
             });
         }
     }
@@ -414,15 +685,29 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBoxStatus;
-    private javax.swing.JComboBox<String> jComboBoxType;
-    private javax.swing.JFormattedTextField jFormattedTextFieldExpirationDate;
-    private javax.swing.JFormattedTextField jFormattedTextFieldValue;
+    private javax.swing.JButton jButtonDeleteAP;
+    private javax.swing.JButton jButtonDeleteAR;
+    private javax.swing.JButton jButtonRefreshAP;
+    private javax.swing.JButton jButtonRefreshAR;
+    private javax.swing.JButton jButtonSaveAP;
+    private javax.swing.JButton jButtonSaveAR;
+    private javax.swing.JButton jButtonUpdateAP;
+    private javax.swing.JButton jButtonUpdateAR;
+    private javax.swing.JComboBox<String> jComboBoxStatusAP;
+    private javax.swing.JComboBox<String> jComboBoxStatusAR;
+    private javax.swing.JComboBox<String> jComboBoxTypeAP;
+    private javax.swing.JComboBox<String> jComboBoxTypeAR;
+    private javax.swing.JFormattedTextField jFormattedTextFieldExpirationDateAP;
+    private javax.swing.JFormattedTextField jFormattedTextFieldExpirationDateAR;
+    private javax.swing.JFormattedTextField jFormattedTextFieldValueAP;
+    private javax.swing.JFormattedTextField jFormattedTextFieldValueAR;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -432,11 +717,15 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldDocNumber;
-    private javax.swing.JTextField jTextFieldProvider;
+    private javax.swing.JTable jTableAP;
+    private javax.swing.JTable jTableAR;
+    private javax.swing.JTextField jTextFieldClientAR;
+    private javax.swing.JTextField jTextFieldDocNumberAP;
+    private javax.swing.JTextField jTextFieldDocNumberAR;
+    private javax.swing.JTextField jTextFieldProviderAP;
     // End of variables declaration//GEN-END:variables
 }

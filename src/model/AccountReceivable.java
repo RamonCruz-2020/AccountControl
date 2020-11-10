@@ -9,20 +9,19 @@ package model;
  *
  * @author Ramon
  */
-public class AccountPayable extends Account{
+public class AccountReceivable extends Account {
     
-    private String provider;
-    
-    public AccountPayable() {
-   
+    private String Client;
+
+    public AccountReceivable() {
     }
 
-    public String getProvider() {
-        return provider;
+    public String getClient() {
+        return Client;
     }
 
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public void setClient(String Client) {
+        this.Client = Client;
     }
     
 }

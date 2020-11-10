@@ -16,28 +16,28 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.AccountPayable;
+import model.AccountReceivable;
 
 /**
  *
  * @author Ramon
  */
-public class AccountPayableDAO {
+public class AccountReceivableDAO {
     
     
     
-    public void create(AccountPayable ap) throws ParseException{
+    public void create(AccountReceivable ar) throws ParseException{
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        Object param = new java.sql.Timestamp(ap.getDate().getTime());
+        Object param = new java.sql.Timestamp(ar.getDate().getTime());
         try {
-            stmt = con.prepareStatement("INSERT INTO accountpayable (provider, docnumber, type_, expirationdate, value_, status_) VALUES (?,?,?,?,?,?);");
-            stmt.setString(1, ap.getProvider());
-            stmt.setString(2, ap.getDocNumber());
-            stmt.setString(3, ap.getType());
+            stmt = con.prepareStatement("INSERT INTO accountreceivable (client_, docnumber, type_, expirationdate, value_, status_) VALUES (?,?,?,?,?,?);");
+            stmt.setString(1, ar.getClient());
+            stmt.setString(2, ar.getDocNumber());
+            stmt.setString(3, ar.getType());
             stmt.setObject(4, param);
-            stmt.setFloat(5, ap.getValue());
-            stmt.setString(6, ap.getStatus());
+            stmt.setFloat(5, ar.getValue());
+            stmt.setString(6, ar.getStatus());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
@@ -47,46 +47,46 @@ public class AccountPayableDAO {
         }
     }
         
-    public List<AccountPayable> read(){
+    public List<AccountReceivable> read(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet ra = null;
-        List<AccountPayable> aps = new ArrayList<AccountPayable>();
+        List<AccountReceivable> ars = new ArrayList<AccountReceivable>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM accountpayable;");
+            stmt = con.prepareStatement("SELECT * FROM accountreceivable;");
             ra = stmt.executeQuery();
             while(ra.next()){
-               AccountPayable ap = new AccountPayable();
-               ap.setId(ra.getInt("id"));
-               ap.setProvider(ra.getString("provider"));
-               ap.setDocNumber(ra.getString("docnumber"));
-               ap.setType(ra.getString("type_"));
-               ap.setDate(ra.getDate("expirationdate"));
-               ap.setValue(ra.getFloat("value_"));
-               ap.setStatus(ra.getString("status_"));
-               aps.add(ap);
+               AccountReceivable ar = new AccountReceivable();
+               ar.setId(ra.getInt("id"));
+               ar.setClient(ra.getString("client_"));
+               ar.setDocNumber(ra.getString("docnumber"));
+               ar.setType(ra.getString("type_"));
+               ar.setDate(ra.getDate("expirationdate"));
+               ar.setValue(ra.getFloat("value_"));
+               ar.setStatus(ra.getString("status_"));
+               ars.add(ar);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountPayableDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountReceivableDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             ConnectionFactory.closeConnection(con, stmt, ra);
         }
-        return aps;
+        return ars;
     }
     
-    public void update(AccountPayable ap) throws ParseException{
+    public void update(AccountReceivable ar) throws ParseException{
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        Object param = new java.sql.Timestamp(ap.getDate().getTime());
+        Object param = new java.sql.Timestamp(ar.getDate().getTime());
         try {
-            stmt = con.prepareStatement("UPDATE accountpayable SET provider = ?, docnumber = ?, type_ = ?, expirationdate = ?, value_ = ?, status_ = ? WHERE id = ?;");
-            stmt.setString(1, ap.getProvider());
-            stmt.setString(2, ap.getDocNumber());
-            stmt.setString(3, ap.getType());
+            stmt = con.prepareStatement("UPDATE accountreceivable SET client_ = ?, docnumber = ?, type_ = ?, expirationdate = ?, value_ = ?, status_ = ? WHERE id = ?;");
+            stmt.setString(1, ar.getClient());
+            stmt.setString(2, ar.getDocNumber());
+            stmt.setString(3, ar.getType());
             stmt.setObject(4, param);
-            stmt.setFloat(5, ap.getValue());
-            stmt.setString(6, ap.getStatus());
-            stmt.setInt(7, ap.getId());
+            stmt.setFloat(5, ar.getValue());
+            stmt.setString(6, ar.getStatus());
+            stmt.setInt(7, ar.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         } catch (SQLException ex) {
@@ -95,12 +95,12 @@ public class AccountPayableDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    public void delete(AccountPayable ap) throws ParseException{
+    public void delete(AccountReceivable ar) throws ParseException{
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("DELETE FROM accountpayable WHERE id = ?;");
-            stmt.setInt(1, ap.getId());
+            stmt = con.prepareStatement("DELETE FROM accountreceivable WHERE id = ?;");
+            stmt.setInt(1, ar.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
         } catch (SQLException ex) {

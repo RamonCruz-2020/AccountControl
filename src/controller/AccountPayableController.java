@@ -7,6 +7,7 @@ package controller;
 
 import dao.AccountPayableDAO;
 import java.text.ParseException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.AccountPayable;
 
@@ -15,28 +16,29 @@ import model.AccountPayable;
  * @author Ramon
  */
 public class AccountPayableController {
+
+    AccountPayableDAO apDao = new AccountPayableDAO();
     
-    public void save(String provider, String docNumber, String type, String expirationDate, float value, String status){
-        AccountPayableDAO apDao = new AccountPayableDAO();
+    public void create(String provider, String docNumber, String type, String expirationDate, float value, String status){
         try {
-            apDao.create(setAccountPayable(0, provider, docNumber, type, expirationDate, value, status));
+            this.apDao.create(setAccountPayable(0, provider, docNumber, type, expirationDate, value, status));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro no Controller: " + ex);
         }
     }
-    
+    public List<AccountPayable> read(){
+        return this.apDao.read();
+    }
     public void update(int id, String provider, String docNumber, String type, String expirationDate, float value, String status){
-        AccountPayableDAO apDao = new AccountPayableDAO();
         try {
-            apDao.update(setAccountPayable(id, provider, docNumber, type, expirationDate, value, status));
+            this.apDao.update(setAccountPayable(id, provider, docNumber, type, expirationDate, value, status));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro no Controller: " + ex);
         }
     }
     public void delete(int id, String provider, String docNumber, String type, String expirationDate, float value, String status){
-        AccountPayableDAO apDao = new AccountPayableDAO();
         try {
-            apDao.delete(setAccountPayable(id, provider, docNumber, type, expirationDate, value, status));
+            this.apDao.delete(setAccountPayable(id, provider, docNumber, type, expirationDate, value, status));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro no Controller: " + ex);
         }
